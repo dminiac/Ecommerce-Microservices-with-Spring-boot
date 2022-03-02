@@ -1,0 +1,67 @@
+package com.example.orderService.service;
+
+import java.time.LocalDate;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import com.example.orderService.entity.Order;
+import com.example.orderService.exception.ResourceNotFoundException;
+import com.example.orderService.model.Product;
+import com.example.orderService.repository.OrderRepository;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+
+@Service
+public class OrderServiceImpl implements OrderService {
+
+	@Autowired
+	private OrderRepository orderRepository;
+
+	@Autowired
+	private RestTemplate restTemplate;
+
+	@HystrixCommand(fallbackMethod = "productServiceFallBack")
+
+	@Override
+	public Order saveOrder(Order order) {
+
+		order.setOrderDate(LocalDate.now());
+
+		int productId = order.getProductId();
+
+		String resourceUrl = "http://localhost:8083/ecom/product/get/" + productId;
+
+		Product product = restTemplate.getForObject(resourceUrl, Product.class);
+
+		double totalPrice = product.getProductPrice();
+		float orderPrice = (float) (order.getQuantity() * totalPrice);
+		order.setOrderAmount(orderPrice);
+
+		Order newOrder = orderRepository.save(order);
+		return newOrder;
+
+	}
+
+	@Override
+	public Order getOrderDetails(int orderId) {
+
+		Optional<Order> optionalOrder = orderRepository.findById(orderId);
+		if (optionalOrder.isEmpty()) {
+			throw new ResourceNotFoundException("Order not found with order id:" + orderId);
+		}
+
+		return optionalOrder.get();
+	}
+
+	@SuppressWarnings("unused")
+	private String productServiceFallBack() {
+
+		System.out.println("Student Service is down!!! fallback route enabled...");
+		return null;
+
+//		return "CIRCUIT BREAKER ENABLED!!! No Response From Student Service at this moment. "
+//				+ " Service will be back shortly - " + LocalDate.now();
+	}
+}

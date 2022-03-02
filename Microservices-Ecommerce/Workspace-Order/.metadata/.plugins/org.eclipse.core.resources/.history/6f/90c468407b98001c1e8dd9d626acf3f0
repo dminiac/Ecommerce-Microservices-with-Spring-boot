@@ -1,0 +1,17 @@
+package com.abc.ecom.model1;
+
+import java.time.LocalDate;
+
+public class Product {
+
+	private int productId;
+
+	private String productName;
+
+	private double productPrice;
+
+	private String productCategory;
+
+	private LocalDate createOn;
+
+}

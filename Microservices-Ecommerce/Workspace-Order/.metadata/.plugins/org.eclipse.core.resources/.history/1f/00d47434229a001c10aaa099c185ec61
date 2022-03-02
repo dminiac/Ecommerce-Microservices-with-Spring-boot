@@ -1,0 +1,34 @@
+server.port = 8084
+
+spring.datasource.url = jdbc:postgresql://localhost:5432/mydb
+spring.datasource.username = ashishrc
+spring.datasource.password = 98926
+spring.jpa.hibernate.ddl-auto = update
+
+server.servlet.context-path=/orderService
+#spring.mvc.pathmatch.matching-strategy=ant-path-matcher
+
+spring.application.name=ecom-order-service
+
+management.endpoints.web.exposure.include= *
+
+
+# logging level
+logging.level.org.springframework=ERROR
+logging.level.com.abc.ecom=DEBUG
+
+# output to a file
+logging.file=app.log
+
+# temp folder example
+#logging.file=${java.io.tmpdir}/app.log
+
+logging.pattern.file=%d %p %c{1.} [%t] %m%n
+
+logging.pattern.console=%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n
+
+## if no active profile, default is 'default'
+##spring.profiles.active=prod
+
+# root level
+#logging.level.=INFO

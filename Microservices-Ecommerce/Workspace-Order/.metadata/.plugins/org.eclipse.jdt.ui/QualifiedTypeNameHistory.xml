@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="com.abc.ecom.service.OrderService"/>
+    <fullyQualifiedTypeName name="com.example.orderService.repository.OrderRepository"/>
+    <fullyQualifiedTypeName name="com.example.orderService.exception.ResourceNotFoundException"/>
+    <fullyQualifiedTypeName name="com.example.orderService.service.OrderService"/>
+    <fullyQualifiedTypeName name="org.springframework.cloud.netflix.hystrix.EnableHystrix"/>
+    <fullyQualifiedTypeName name="org.springframework.web.client.RestTemplate"/>
+    <fullyQualifiedTypeName name="org.springframework.context.annotation.Bean"/>
+    <fullyQualifiedTypeName name="com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand"/>
+    <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
+    <fullyQualifiedTypeName name="com.example.orderService.model.Product"/>
+    <fullyQualifiedTypeName name="com.example.orderService.entity.Order"/>
+</qualifiedTypeNameHistroy>

@@ -1,0 +1,6 @@
+package com.example.orderService.service;
+
+@Service
+public class ProductService {
+
+}
